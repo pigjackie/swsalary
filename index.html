@@ -37,201 +37,76 @@
         .subtitle { color: #888; font-size: 14px; margin-top: 5px; }
         h2 { color: #D4AF37; font-size: 18px; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px; }
         
-        .btn-gold {
-            background-color: #D4AF37;
-            color: #121212;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            width: 100%;
-        }
+        .btn-gold { background-color: #D4AF37; color: #121212; border: none; padding: 10px 20px; border-radius: 4px; font-weight: bold; cursor: pointer; transition: background-color 0.2s; width: 100%; }
         .btn-gold:hover { background-color: #F3E5AB; }
         
-        .btn-danger {
-            background-color: #8b0000;
-            color: #fff;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 13px;
-        }
+        .btn-danger { background-color: #8b0000; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 13px; }
         .btn-danger:hover { background-color: #a50000; }
 
-        .btn-outline {
-            background-color: transparent;
-            color: #D4AF37;
-            border: 1px solid #D4AF37;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 100%;
-            font-weight: bold;
-            transition: all 0.2s;
-        }
+        .btn-outline { background-color: transparent; color: #D4AF37; border: 1px solid #D4AF37; padding: 10px 20px; border-radius: 4px; cursor: pointer; width: 100%; font-weight: bold; transition: all 0.2s; }
         .btn-outline:hover { background-color: #D4AF37; color: #121212; }
 
         .text-danger { color: #ff6b6b; cursor: pointer; font-size: 14px; text-decoration: underline; background: none; border: none; }
 
-        .layout {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .sidebar {
-            width: 32%;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        .main-content {
-            width: calc(68% - 20px);
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        @media (max-width: 1100px) {
-            .sidebar, .main-content { width: 100%; }
-        }
+        .layout { display: flex; gap: 20px; flex-wrap: wrap; }
+        .sidebar { width: 32%; display: flex; flex-direction: column; gap: 20px; }
+        .main-content { width: calc(68% - 20px); display: flex; flex-direction: column; gap: 20px; }
+        @media (max-width: 1100px) { .sidebar, .main-content { width: 100%; } }
 
-        .card {
-            background-color: #1e1e1e;
-            border: 1px solid #333;
-            border-top: 3px solid #D4AF37;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-        }
+        .card { background-color: #1e1e1e; border: 1px solid #333; border-top: 3px solid #D4AF37; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
 
         .form-group { margin-bottom: 15px; }
-        label {
-            display: block;
-            color: #bbb;
-            margin-bottom: 5px;
-            font-size: 14px;
-        }
-        input, select {
-            width: 100%;
-            background-color: #121212;
-            color: #D4AF37;
-            border: 1px solid #444;
-            padding: 10px;
-            border-radius: 4px;
-            outline: none;
-            font-size: 15px;
-            color-scheme: dark;
-        }
+        label { display: block; color: #bbb; margin-bottom: 5px; font-size: 14px; }
+        input, select { width: 100%; background-color: #121212; color: #D4AF37; border: 1px solid #444; padding: 10px; border-radius: 4px; outline: none; font-size: 15px; color-scheme: dark; }
         input:focus, select:focus { border-color: #D4AF37; }
         
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-            gap: 15px;
-        }
-        @media (max-width: 1400px) {
-            .stats-grid { grid-template-columns: 1fr 1fr; }
-        }
-        .stat-card {
-            background-color: #1e1e1e;
-            border: 1px solid #333;
-            border-left: 4px solid #D4AF37;
-            padding: 15px;
-            border-radius: 8px;
-        }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 15px; }
+        @media (max-width: 1400px) { .stats-grid { grid-template-columns: 1fr 1fr; } }
+        
+        .stat-card { background-color: #1e1e1e; border: 1px solid #333; border-left: 4px solid #D4AF37; padding: 15px; border-radius: 8px; }
         .stat-card p { color: #888; font-size: 13px; margin-bottom: 5px; }
         .stat-card h3 { font-size: 24px; color: #fff; margin-top: 0; }
         .stat-card.highlight { border-left: 4px solid #4CAF50; background-color: #1a221a; }
         .stat-card.highlight h3 { color: #4CAF50; }
         .stat-card.revenue { border-left: 4px solid #2196F3; }
         
+        /* 補習班進度條樣式 */
+        .progress-container { margin-bottom: 15px; background: #181818; padding: 15px; border-radius: 6px; border: 1px solid #333; }
+        .progress-header { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
+        .progress-bar-bg { width: 100%; background-color: #333; border-radius: 4px; height: 10px; overflow: hidden; }
+        .progress-bar-fill { height: 100%; background-color: #D4AF37; transition: width 0.3s; }
+        .progress-bar-fill.success { background-color: #4CAF50; }
+        
         .header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .filter-section { display: flex; align-items: center; gap: 15px; }
         .filter-label { color: #D4AF37; font-weight: bold; }
 
         .table-container { overflow-x: auto; max-height: 500px; overflow-y: auto; }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            white-space: nowrap;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #333;
-            font-size: 13px;
-        }
+        table { width: 100%; border-collapse: collapse; white-space: nowrap; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #333; font-size: 13px; }
         th { color: #D4AF37; font-weight: bold; background-color: #181818; position: sticky; top: 0; }
         tbody tr:hover { background-color: #252525; }
         .text-right { text-align: right; }
         .text-gold { color: #D4AF37; font-weight: bold; }
         .text-green { color: #4CAF50; font-weight: bold; }
-        .text-muted { color: #777; font-size: 12px; }
         .delete-record-btn { color: #888; background: none; border: none; cursor: pointer; font-size: 18px; transition: color 0.2s; padding: 0 5px; }
         .delete-record-btn:hover { color: #ff6b6b; }
         .badge { background-color: #333; color: #ccc; padding: 2px 6px; border-radius: 4px; font-size: 11px; margin-left: 5px; }
+        .badge-loc { background-color: #2c2c2c; color: #4CAF50; border: 1px solid #4CAF50; }
 
-        .modal-overlay, .login-overlay, .loading-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.9);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
+        .modal-overlay, .login-overlay, .loading-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); display: flex; justify-content: center; align-items: center; z-index: 1000; }
         .loading-overlay { z-index: 2000; display: none; flex-direction: column; color: #D4AF37; font-weight: bold; }
         
-        .modal-content {
-            background-color: #1e1e1e;
-            border: 1px solid #D4AF37;
-            width: 500px;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.8);
-        }
-        .login-box {
-            background-color: #1e1e1e;
-            border-top: 4px solid #D4AF37;
-            width: 350px;
-            border-radius: 8px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-        }
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .close-btn {
-            background: none;
-            border: none;
-            color: #aaa;
-            font-size: 24px;
-            cursor: pointer;
-        }
+        .modal-content { background-color: #1e1e1e; border: 1px solid #D4AF37; width: 500px; border-radius: 8px; padding: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.8); }
+        .login-box { background-color: #1e1e1e; border-top: 4px solid #D4AF37; width: 350px; border-radius: 8px; padding: 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .close-btn { background: none; border: none; color: #aaa; font-size: 24px; cursor: pointer; }
         .close-btn:hover { color: #fff; }
         
-        ul.teacher-list { list-style: none; margin-top: 15px; max-height: 250px; overflow-y: auto; border: 1px solid #333; border-radius: 4px; }
-        ul.teacher-list li {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px;
-            background-color: #181818;
-            border-bottom: 1px solid #333;
-        }
-        ul.teacher-list li:last-child { border-bottom: none; }
+        ul.data-list { list-style: none; margin-top: 15px; max-height: 250px; overflow-y: auto; border: 1px solid #333; border-radius: 4px; }
+        ul.data-list li { display: flex; justify-content: space-between; align-items: center; padding: 12px; background-color: #181818; border-bottom: 1px solid #333; }
+        ul.data-list li:last-child { border-bottom: none; }
         .empty-msg { text-align: center; color: #666; padding: 20px; }
         
         .tab-container { display: flex; margin-bottom: 15px; border-bottom: 1px solid #333; }
@@ -244,9 +119,7 @@
 </head>
 <body>
 
-    <div id="loadingOverlay" class="loading-overlay">
-        <p>資料同步中，請稍候...</p>
-    </div>
+    <div id="loadingOverlay" class="loading-overlay"><p>資料同步中，請稍候...</p></div>
 
     <div id="loginOverlay" class="login-overlay">
         <div class="login-box">
@@ -263,10 +136,11 @@
         <header>
             <div>
                 <h1>雲端營運與利潤管理系統</h1>
-                <p class="subtitle">Firestore 雲端同步架構</p>
+                <p class="subtitle">Firestore 雲端同步架構 (含多據點目標管理)</p>
             </div>
             <div style="display: flex; gap: 15px;">
-                <button id="btnOpenModal" class="btn-outline" style="width: auto;">管理導師名單</button>
+                <button id="btnOpenLocationModal" class="btn-outline" style="width: auto; border-color: #4CAF50; color: #4CAF50;">管理補習班目標</button>
+                <button id="btnOpenTeacherModal" class="btn-outline" style="width: auto;">管理導師名單</button>
             </div>
         </header>
 
@@ -275,119 +149,64 @@
             <div class="sidebar">
                 <div class="card">
                     <div class="tab-container">
-                        <div class="tab active" id="tabBatch">整月常態排課</div>
-                        <div class="tab" id="tabSingle">單堂臨時排課</div>
-                        <div class="tab" id="tabExpense">單筆額外雜支</div>
+                        <div class="tab active" id="tabBatch">常態排課</div>
+                        <div class="tab" id="tabSingle">單堂排課</div>
+                        <div class="tab" id="tabExpense">單筆雜支</div>
                     </div>
 
                     <form id="batchForm" class="form-section active">
                         <div class="grid-2">
-                            <div class="form-group">
-                                <label>選擇年月</label>
-                                <input type="month" id="batchMonth" required>
-                            </div>
+                            <div class="form-group"><label>選擇年月</label><input type="month" id="batchMonth" required></div>
                             <div class="form-group">
                                 <label>每星期幾上課</label>
                                 <select id="batchWeekday" required>
-                                    <option value="1">星期一</option>
-                                    <option value="2">星期二</option>
-                                    <option value="3">星期三</option>
-                                    <option value="4">星期四</option>
-                                    <option value="5">星期五</option>
-                                    <option value="6">星期六</option>
-                                    <option value="0">星期日</option>
+                                    <option value="1">星期一</option><option value="2">星期二</option><option value="3">星期三</option>
+                                    <option value="4">星期四</option><option value="5">星期五</option><option value="6">星期六</option><option value="0">星期日</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label>指派導師</label>
-                            <select id="batchTeacher" class="teacher-select" required></select>
-                        </div>
-                        <div class="form-group">
-                            <label>授課班級 / 地點</label>
-                            <input type="text" id="batchClass" required>
-                        </div>
-                        <div class="form-group">
-                            <label>單堂時數</label>
-                            <input type="number" id="batchHours" step="0.5" required>
+                        <div class="form-group"><label>所屬補習班</label><select id="batchLocation" class="location-select" required></select></div>
+                        <div class="form-group"><label>指派導師</label><select id="batchTeacher" class="teacher-select" required></select></div>
+                        <div class="grid-2">
+                            <div class="form-group"><label>班級名稱</label><input type="text" id="batchClass" required></div>
+                            <div class="form-group"><label>單堂時數</label><input type="number" id="batchHours" step="0.5" required></div>
                         </div>
                         <div class="divider"></div>
                         <div class="grid-2">
-                            <div class="form-group">
-                                <label style="color: #2196F3;">補習班給付鐘點</label>
-                                <input type="number" id="batchSchoolRate" required>
-                            </div>
-                            <div class="form-group">
-                                <label style="color: #ff9800;">導師實領鐘點</label>
-                                <input type="number" id="batchTeacherRate" required>
-                            </div>
+                            <div class="form-group"><label style="color: #2196F3;">補習班給付鐘點</label><input type="number" id="batchSchoolRate" required></div>
+                            <div class="form-group"><label style="color: #ff9800;">導師實領鐘點</label><input type="number" id="batchTeacherRate" required></div>
                         </div>
                         <button type="submit" class="btn-gold">批次寫入雲端紀錄</button>
                     </form>
 
                     <form id="singleForm" class="form-section">
-                        <div class="form-group">
-                            <label>上課日期</label>
-                            <input type="date" id="singleDate" required>
-                        </div>
-                        <div class="form-group">
-                            <label>指派導師</label>
-                            <select id="singleTeacher" class="teacher-select" required></select>
-                        </div>
-                        <div class="form-group">
-                            <label>班級 / 地點名稱</label>
-                            <input type="text" id="singleClass" required>
-                        </div>
-                        <div class="form-group">
-                            <label>授課時數</label>
-                            <input type="number" id="singleHours" step="0.5" required>
+                        <div class="form-group"><label>上課日期</label><input type="date" id="singleDate" required></div>
+                        <div class="form-group"><label>所屬補習班</label><select id="singleLocation" class="location-select" required></select></div>
+                        <div class="form-group"><label>指派導師</label><select id="singleTeacher" class="teacher-select" required></select></div>
+                        <div class="grid-2">
+                            <div class="form-group"><label>班級名稱</label><input type="text" id="singleClass" required></div>
+                            <div class="form-group"><label>授課時數</label><input type="number" id="singleHours" step="0.5" required></div>
                         </div>
                         <div class="grid-2">
-                            <div class="form-group">
-                                <label style="color: #2196F3;">補習班給付鐘點</label>
-                                <input type="number" id="singleSchoolRate" required>
-                            </div>
-                            <div class="form-group">
-                                <label style="color: #ff9800;">導師實領鐘點</label>
-                                <input type="number" id="singleTeacherRate" required>
-                            </div>
+                            <div class="form-group"><label style="color: #2196F3;">補習班給付鐘點</label><input type="number" id="singleSchoolRate" required></div>
+                            <div class="form-group"><label style="color: #ff9800;">導師實領鐘點</label><input type="number" id="singleTeacherRate" required></div>
                         </div>
                         <div class="divider"></div>
                         <p style="color:#D4AF37; font-size:14px; margin-bottom:10px; font-weight:bold;">附帶額外支出 (由利潤扣除)</p>
                         <div class="grid-2">
-                            <div class="form-group">
-                                <label>支出項目</label>
-                                <input type="text" id="singleExpName">
-                            </div>
-                            <div class="form-group">
-                                <label>支出金額</label>
-                                <input type="number" id="singleExpAmt" placeholder="0">
-                            </div>
+                            <div class="form-group"><label>支出項目</label><input type="text" id="singleExpName"></div>
+                            <div class="form-group"><label>支出金額</label><input type="number" id="singleExpAmt" placeholder="0"></div>
                         </div>
                         <button type="submit" class="btn-gold">寫入單筆紀錄</button>
                     </form>
 
                     <form id="expenseForm" class="form-section">
-                        <div class="form-group">
-                            <label>發生日期</label>
-                            <input type="date" id="expDate" required>
-                        </div>
-                        <div class="form-group">
-                            <label>經手導師</label>
-                            <select id="expTeacher" class="teacher-select" required></select>
-                        </div>
-                        <div class="form-group">
-                            <label>歸屬班級 / 地點</label>
-                            <input type="text" id="expClass" required>
-                        </div>
-                        <div class="form-group">
-                            <label>支出項目明細</label>
-                            <input type="text" id="expDetail" required>
-                        </div>
-                        <div class="form-group">
-                            <label>總金額</label>
-                            <input type="number" id="expTotal" required>
-                        </div>
+                        <div class="form-group"><label>發生日期</label><input type="date" id="expDate" required></div>
+                        <div class="form-group"><label>歸屬補習班</label><select id="expLocation" class="location-select" required></select></div>
+                        <div class="form-group"><label>經手導師</label><select id="expTeacher" class="teacher-select" required></select></div>
+                        <div class="form-group"><label>歸屬班級 (選填)</label><input type="text" id="expClass"></div>
+                        <div class="form-group"><label>支出項目明細</label><input type="text" id="expDetail" required></div>
+                        <div class="form-group"><label>總金額</label><input type="number" id="expTotal" required></div>
                         <button type="submit" class="btn-gold">寫入這筆支出</button>
                     </form>
                 </div>
@@ -417,14 +236,20 @@
                         <h3 id="displayExpPay" style="color:#ff9800;">NT$ 0</h3>
                     </div>
                     <div class="stat-card highlight">
-                        <p>本月淨利潤 (收入)</p>
+                        <p>本月總淨利潤</p>
                         <h3 id="displayProfit">NT$ 0</h3>
                     </div>
                 </div>
 
+                <div class="card" id="locationProgressSection">
+                    <h2 style="font-size: 16px; border-bottom: none; margin-bottom: 5px;">🎯 各補習班目標達成進度</h2>
+                    <div id="locationProgressUI" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px;">
+                        </div>
+                </div>
+
                 <div class="card">
                     <div class="header-flex">
-                        <h2>雲端營運清單</h2>
+                        <h2>雲端營運明細清單</h2>
                         <button id="btnClearRecords" class="text-danger">清空此月份所有雲端紀錄</button>
                     </div>
                     <div class="table-container">
@@ -432,8 +257,8 @@
                             <thead>
                                 <tr>
                                     <th>日期</th>
+                                    <th>補習班 / 班級</th>
                                     <th>導師</th>
-                                    <th>班級</th>
                                     <th>時數</th>
                                     <th>補習班給付</th>
                                     <th>導師成本</th>
@@ -451,32 +276,41 @@
         </div>
     </div>
 
-    <div id="modalOverlay" class="modal-overlay" style="display: none;">
+    <div id="teacherModalOverlay" class="modal-overlay" style="display: none;">
         <div class="modal-content">
             <div class="modal-header">
                 <h2>管理雲端導師名單</h2>
-                <button id="btnCloseModal" class="close-btn">&times;</button>
+                <button class="close-btn" onclick="document.getElementById('teacherModalOverlay').style.display='none'">&times;</button>
             </div>
-            
             <div class="layout" style="flex-wrap: nowrap; gap: 10px; margin-bottom: 10px;">
                 <input type="text" id="newTName" placeholder="導師姓名" style="flex: 1;">
                 <input type="text" id="newTSubject" placeholder="授課科目" style="flex: 1;">
                 <button id="btnAddTeacher" class="btn-gold" style="width: auto;">新增</button>
             </div>
-            
-            <ul id="teacherListUI" class="teacher-list"></ul>
+            <ul id="teacherListUI" class="data-list"></ul>
+        </div>
+    </div>
+
+    <div id="locationModalOverlay" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 style="color: #4CAF50;">管理補習班 (據點) 目標</h2>
+                <button class="close-btn" onclick="document.getElementById('locationModalOverlay').style.display='none'">&times;</button>
+            </div>
+            <div class="layout" style="flex-wrap: nowrap; gap: 10px; margin-bottom: 10px;">
+                <input type="text" id="newLName" placeholder="補習班名稱" style="flex: 1;">
+                <input type="number" id="newLTarget" placeholder="本月目標淨利潤 (NT$)" style="flex: 1;">
+                <button id="btnAddLocation" class="btn-gold" style="width: auto; background-color: #4CAF50; color: #fff;">新增</button>
+            </div>
+            <ul id="locationListUI" class="data-list"></ul>
         </div>
     </div>
 
     <script type="module">
-        // 匯入 Firebase 模組 (已為你更新至符合設定檔的 12.16.0 版本)
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
-        // 系統登入密碼 (可隨時在此修改)
         const SYSTEM_PASSWORD = "8888"; 
-
-        // 你專屬的 Firebase 金鑰設定檔
         const firebaseConfig = {
             apiKey: "AIzaSyAIl-ES6dYs_uPpalYsWWxSGyf3SiS1i04",
             authDomain: "swsalary-debe7.firebaseapp.com",
@@ -490,15 +324,10 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // 介面與資料狀態管理
         let records = [];
         let teachers = [];
+        let locations = [];
 
-        const tableBody = document.getElementById('tableBody');
-        const displaySchoolPay = document.getElementById('displaySchoolPay');
-        const displayTeacherPay = document.getElementById('displayTeacherPay');
-        const displayExpPay = document.getElementById('displayExpPay');
-        const displayProfit = document.getElementById('displayProfit');
         const filterMonthInput = document.getElementById('filterMonth');
         const batchMonthInput = document.getElementById('batchMonth');
         const loadingOverlay = document.getElementById('loadingOverlay');
@@ -506,15 +335,14 @@
         function showLoading() { loadingOverlay.style.display = 'flex'; }
         function hideLoading() { loadingOverlay.style.display = 'none'; }
 
-        // 登入邏輯
+        // 登入
         document.getElementById('btnLogin').addEventListener('click', async function() {
-            const inputPwd = document.getElementById('sysPassword').value;
-            if(inputPwd === SYSTEM_PASSWORD) {
+            if(document.getElementById('sysPassword').value === SYSTEM_PASSWORD) {
                 document.getElementById('loginOverlay').style.display = 'none';
                 document.getElementById('mainContainer').style.display = 'block';
                 
                 showLoading();
-                await loadTeachers();
+                await Promise.all([loadTeachers(), loadLocations()]);
                 await loadRecords();
                 
                 const today = new Date();
@@ -522,416 +350,334 @@
                 filterMonthInput.value = currentMonthStr;
                 batchMonthInput.value = currentMonthStr;
                 refreshDashboard();
-                
                 hideLoading();
             } else {
                 document.getElementById('loginError').style.display = 'block';
             }
         });
 
-        document.getElementById('sysPassword').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') { document.getElementById('btnLogin').click(); }
-        });
-
-        // 頁籤切換邏輯
+        // 頁籤切換
         const tabs = ['tabBatch', 'tabSingle', 'tabExpense'];
         const forms = ['batchForm', 'singleForm', 'expenseForm'];
-
-        tabs.forEach(function(tabId, index) {
+        tabs.forEach((tabId, index) => {
             document.getElementById(tabId).addEventListener('click', function() {
-                tabs.forEach(function(t) { document.getElementById(t).classList.remove('active'); });
-                forms.forEach(function(f) { document.getElementById(f).classList.remove('active'); });
-                
+                tabs.forEach(t => document.getElementById(t).classList.remove('active'));
+                forms.forEach(f => document.getElementById(f).classList.remove('active'));
                 this.classList.add('active');
                 document.getElementById(forms[index]).classList.add('active');
             });
         });
 
-        // 雲端資料庫讀取功能
+        // 資料庫讀取
         async function loadTeachers() {
             teachers = [];
-            try {
-                const q = query(collection(db, "teachers"));
-                const querySnapshot = await getDocs(q);
-                querySnapshot.forEach(function(docSnapshot) {
-                    teachers.push({ id: docSnapshot.id, ...docSnapshot.data() });
-                });
-                
-                // 如果雲端尚無資料，為你建立預設的「宋維」
-                if(teachers.length === 0) {
-                    await addDoc(collection(db, "teachers"), {
-                        name: '宋維',
-                        subject: '國文/英文'
-                    });
-                    return await loadTeachers();
-                }
+            const q = query(collection(db, "teachers"));
+            const qs = await getDocs(q);
+            qs.forEach(doc => teachers.push({ id: doc.id, ...doc.data() }));
+            refreshSelects('.teacher-select', teachers, 'name', 'subject');
+            renderTeacherList();
+        }
 
-                refreshTeacherSelect();
-                refreshTeacherList();
-            } catch (e) {
-                console.error("讀取導師名單失敗", e);
-            }
+        async function loadLocations() {
+            locations = [];
+            const q = query(collection(db, "locations"));
+            const qs = await getDocs(q);
+            qs.forEach(doc => locations.push({ id: doc.id, ...doc.data() }));
+            refreshSelects('.location-select', locations, 'name');
+            renderLocationList();
         }
 
         async function loadRecords() {
             records = [];
-            try {
-                const q = query(collection(db, "records"));
-                const querySnapshot = await getDocs(q);
-                querySnapshot.forEach(function(docSnapshot) {
-                    records.push({ id: docSnapshot.id, ...docSnapshot.data() });
-                });
-                refreshDashboard();
-            } catch (e) {
-                console.error("讀取排課紀錄失敗", e);
-            }
+            const q = query(collection(db, "records"));
+            const qs = await getDocs(q);
+            qs.forEach(doc => records.push({ id: doc.id, ...doc.data() }));
+            refreshDashboard();
         }
 
-        // 畫面渲染功能
-        function refreshTeacherSelect() {
-            const selects = document.querySelectorAll('.teacher-select');
-            selects.forEach(function(sel) {
+        // 下拉選單渲染
+        function refreshSelects(selector, dataArray, primaryKey, secondaryKey = null) {
+            const selects = document.querySelectorAll(selector);
+            selects.forEach(sel => {
                 const currentVal = sel.value;
-                sel.innerHTML = '<option value="">請選擇導師</option>';
-                teachers.forEach(function(t) {
+                sel.innerHTML = '<option value="">請選擇...</option>';
+                dataArray.forEach(item => {
                     const opt = document.createElement('option');
-                    opt.value = t.id;
-                    opt.textContent = t.name + ' (' + t.subject + ')';
+                    opt.value = item.id;
+                    opt.textContent = secondaryKey ? `${item[primaryKey]} (${item[secondaryKey]})` : item[primaryKey];
                     sel.appendChild(opt);
                 });
                 sel.value = currentVal;
             });
         }
 
-        function refreshTeacherList() {
+        // 導師與補習班列表 UI
+        function renderTeacherList() {
             const ui = document.getElementById('teacherListUI');
-            ui.innerHTML = '';
-            if(teachers.length === 0) {
-                ui.innerHTML = '<li class="empty-msg">尚無導師資料</li>';
-                return;
-            }
-            teachers.forEach(function(t) {
+            ui.innerHTML = teachers.length ? '' : '<li class="empty-msg">尚無資料</li>';
+            teachers.forEach(t => {
                 const li = document.createElement('li');
-                const infoDiv = document.createElement('div');
-                infoDiv.innerHTML = '<span style="color:#fff; font-weight:bold;">' + t.name + '</span> <span style="color:#888; font-size:13px; margin-left:10px;">' + t.subject + '</span>';
-                
-                const delBtn = document.createElement('button');
-                delBtn.className = 'btn-danger';
-                delBtn.textContent = '刪除';
-                delBtn.addEventListener('click', async function() {
-                    if(confirm('確定要刪除這筆雲端導師資料嗎？')) {
-                        showLoading();
-                        await deleteDoc(doc(db, "teachers", t.id));
-                        await loadTeachers();
-                        hideLoading();
-                    }
-                });
-
-                li.appendChild(infoDiv);
-                li.appendChild(delBtn);
-                ui.appendChild(li);
+                li.innerHTML = `<div><span style="color:#fff; font-weight:bold;">${t.name}</span> <span style="color:#888; font-size:13px; margin-left:10px;">${t.subject}</span></div>`;
+                const btn = document.createElement('button');
+                btn.className = 'btn-danger'; btn.textContent = '刪除';
+                btn.onclick = async () => {
+                    if(confirm('確定刪除？')) { showLoading(); await deleteDoc(doc(db, "teachers", t.id)); await loadTeachers(); hideLoading(); }
+                };
+                li.appendChild(btn); ui.appendChild(li);
             });
         }
 
+        function renderLocationList() {
+            const ui = document.getElementById('locationListUI');
+            ui.innerHTML = locations.length ? '' : '<li class="empty-msg">尚無資料</li>';
+            locations.forEach(loc => {
+                const li = document.createElement('li');
+                li.innerHTML = `<div><span style="color:#4CAF50; font-weight:bold;">${loc.name}</span> <span style="color:#888; font-size:13px; margin-left:10px;">目標: NT$ ${loc.targetProfit.toLocaleString()}</span></div>`;
+                const btn = document.createElement('button');
+                btn.className = 'btn-danger'; btn.textContent = '刪除';
+                btn.onclick = async () => {
+                    if(confirm('確定刪除此據點？')) { showLoading(); await deleteDoc(doc(db, "locations", loc.id)); await loadLocations(); hideLoading(); }
+                };
+                li.appendChild(btn); ui.appendChild(li);
+            });
+        }
+
+        // Dashboard 結算與渲染
         function refreshDashboard() {
+            const tableBody = document.getElementById('tableBody');
             tableBody.innerHTML = '';
-            let sumSchoolPay = 0;
-            let sumTeacherPay = 0;
-            let sumExpPay = 0;
-            let totalProfit = 0;
-
+            
+            let sumSchoolPay = 0, sumTeacherPay = 0, sumExpPay = 0, totalProfit = 0;
             const selectedMonth = filterMonthInput.value;
-            const filteredRecords = records.filter(function(rec) {
-                return rec.date.substring(0, 7) === selectedMonth;
-            });
+            const filteredRecords = records.filter(rec => rec.date.substring(0, 7) === selectedMonth);
+            const sorted = filteredRecords.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-            const sorted = filteredRecords.sort(function(a, b) {
-                return new Date(b.date) - new Date(a.date);
-            });
+            // 計算各補習班利潤
+            let locProfits = {};
+            locations.forEach(loc => locProfits[loc.name] = 0);
 
-            sorted.forEach(function(rec) {
+            sorted.forEach(rec => {
                 sumSchoolPay += rec.schoolPay;
                 sumTeacherPay += rec.teacherPay;
                 sumExpPay += rec.expAmt;
-                
                 const singleProfit = rec.schoolPay - rec.teacherPay - rec.expAmt;
                 totalProfit += singleProfit;
 
-                let typeBadge = '';
-                if(rec.hours === 0) {
-                    typeBadge = '<span class="badge" style="background:#8b4513;">純支出</span>';
+                // 累加至對應補習班
+                if(rec.locationName && locProfits[rec.locationName] !== undefined) {
+                    locProfits[rec.locationName] += singleProfit;
                 }
 
+                let typeBadge = rec.hours === 0 ? '<span class="badge" style="background:#8b4513;">純支出</span>' : '';
+                let locBadge = rec.locationName ? `<span class="badge badge-loc">${rec.locationName}</span>` : '';
+
                 const tr = document.createElement('tr');
-                tr.innerHTML = '<td>' + rec.date + '</td>' +
-                               '<td>' + rec.teacherName + typeBadge + '</td>' +
-                               '<td>' + rec.className + '</td>' +
-                               '<td>' + (rec.hours > 0 ? rec.hours + 'h' : '-') + '</td>' +
-                               '<td><span style="color:#2196F3;">' + (rec.schoolPay > 0 ? rec.schoolPay.toLocaleString() : '-') + '</span></td>' +
-                               '<td><span style="color:#ff9800;">' + (rec.teacherPay > 0 ? rec.teacherPay.toLocaleString() : '-') + '</span></td>' +
-                               '<td>' + (rec.expAmt > 0 ? rec.expAmt.toLocaleString() : '-') + '</td>' +
-                               '<td class="text-right ' + (singleProfit >= 0 ? 'text-green' : 'text-danger') + '">NT$ ' + singleProfit.toLocaleString() + '</td>' +
-                               '<td class="text-right"><button class="delete-record-btn" data-id="' + rec.id + '">&times;</button></td>';
+                tr.innerHTML = `
+                    <td>${rec.date}</td>
+                    <td>${locBadge} ${rec.className || '-'}</td>
+                    <td>${rec.teacherName} ${typeBadge}</td>
+                    <td>${rec.hours > 0 ? rec.hours + 'h' : '-'}</td>
+                    <td><span style="color:#2196F3;">${rec.schoolPay > 0 ? rec.schoolPay.toLocaleString() : '-'}</span></td>
+                    <td><span style="color:#ff9800;">${rec.teacherPay > 0 ? rec.teacherPay.toLocaleString() : '-'}</span></td>
+                    <td>${rec.expAmt > 0 ? rec.expAmt.toLocaleString() : '-'}</td>
+                    <td class="text-right ${singleProfit >= 0 ? 'text-green' : 'text-danger'}">NT$ ${singleProfit.toLocaleString()}</td>
+                    <td class="text-right"><button class="delete-record-btn" data-id="${rec.id}">&times;</button></td>
+                `;
                 tableBody.appendChild(tr);
             });
 
-            document.querySelectorAll('.delete-record-btn').forEach(function(btn) {
-                btn.addEventListener('click', async function() {
-                    const recId = this.getAttribute('data-id');
-                    if(confirm('確定要永久刪除這筆雲端紀錄嗎？')) {
-                        showLoading();
-                        await deleteDoc(doc(db, "records", recId));
-                        await loadRecords();
-                        hideLoading();
+            // 綁定刪除按鈕
+            document.querySelectorAll('.delete-record-btn').forEach(btn => {
+                btn.onclick = async function() {
+                    if(confirm('確定永久刪除？')) {
+                        showLoading(); await deleteDoc(doc(db, "records", this.getAttribute('data-id')));
+                        await loadRecords(); hideLoading();
                     }
-                });
+                };
             });
 
-            displaySchoolPay.textContent = 'NT$ ' + sumSchoolPay.toLocaleString();
-            displayTeacherPay.textContent = 'NT$ ' + sumTeacherPay.toLocaleString();
-            displayExpPay.textContent = 'NT$ ' + sumExpPay.toLocaleString();
-            displayProfit.textContent = 'NT$ ' + totalProfit.toLocaleString();
-        }
+            document.getElementById('displaySchoolPay').textContent = 'NT$ ' + sumSchoolPay.toLocaleString();
+            document.getElementById('displayTeacherPay').textContent = 'NT$ ' + sumTeacherPay.toLocaleString();
+            document.getElementById('displayExpPay').textContent = 'NT$ ' + sumExpPay.toLocaleString();
+            document.getElementById('displayProfit').textContent = 'NT$ ' + totalProfit.toLocaleString();
 
+            // 繪製目標進度條
+            const progressUI = document.getElementById('locationProgressUI');
+            progressUI.innerHTML = '';
+            locations.forEach(loc => {
+                const currentProfit = locProfits[loc.name] || 0;
+                const target = loc.targetProfit || 1; 
+                let percent = Math.max(0, Math.min(100, (currentProfit / target) * 100));
+                
+                const div = document.createElement('div');
+                div.className = 'progress-container';
+                div.innerHTML = `
+                    <div class="progress-header">
+                        <strong style="color: #4CAF50;">${loc.name}</strong>
+                        <span>NT$ ${currentProfit.toLocaleString()} / <span style="color:#888;">${target.toLocaleString()}</span></span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill ${percent >= 100 ? 'success' : ''}" style="width: ${percent}%;"></div>
+                    </div>
+                    <div style="text-align:right; font-size:12px; color:#aaa; margin-top:5px;">達成率: ${percent.toFixed(1)}%</div>
+                `;
+                progressUI.appendChild(div);
+            });
+        }
         filterMonthInput.addEventListener('change', refreshDashboard);
 
-        // 雲端寫入邏輯
-        
-        // 1. 批次新增提交
+        // 新增導師 / 補習班
+        document.getElementById('btnOpenTeacherModal').onclick = () => document.getElementById('teacherModalOverlay').style.display='flex';
+        document.getElementById('btnOpenLocationModal').onclick = () => document.getElementById('locationModalOverlay').style.display='flex';
+
+        document.getElementById('btnAddTeacher').onclick = async () => {
+            const name = document.getElementById('newTName').value.trim();
+            const subject = document.getElementById('newTSubject').value.trim() || '未指定';
+            if(!name) return alert('請輸入姓名');
+            showLoading();
+            await addDoc(collection(db, "teachers"), { name, subject });
+            document.getElementById('newTName').value = ''; document.getElementById('newTSubject').value = '';
+            await loadTeachers(); hideLoading();
+        };
+
+        document.getElementById('btnAddLocation').onclick = async () => {
+            const name = document.getElementById('newLName').value.trim();
+            const target = parseFloat(document.getElementById('newLTarget').value) || 0;
+            if(!name) return alert('請輸入補習班名稱');
+            showLoading();
+            await addDoc(collection(db, "locations"), { name, targetProfit: target });
+            document.getElementById('newLName').value = ''; document.getElementById('newLTarget').value = '';
+            await loadLocations(); hideLoading();
+        };
+
+        // 表單提交流程輔助函數
+        function getSelectText(id) {
+            const el = document.getElementById(id);
+            return el.options[el.selectedIndex].text;
+        }
+
+        // 1. 批次新增
         document.getElementById('batchForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const yearMonth = document.getElementById('batchMonth').value;
-            const weekdayIndex = parseInt(document.getElementById('batchWeekday').value);
-            const hours = parseFloat(document.getElementById('batchHours').value);
-            const schoolRate = parseFloat(document.getElementById('batchSchoolRate').value);
-            const teacherRate = parseFloat(document.getElementById('batchTeacherRate').value);
-            const tSelect = document.getElementById('batchTeacher');
-            const tName = tSelect.options[tSelect.selectedIndex].text;
+            const weekday = parseInt(document.getElementById('batchWeekday').value);
+            const locName = getSelectText('batchLocation');
+            const tName = getSelectText('batchTeacher');
             const cName = document.getElementById('batchClass').value.trim();
+            const hours = parseFloat(document.getElementById('batchHours').value);
+            const sRate = parseFloat(document.getElementById('batchSchoolRate').value);
+            const tRate = parseFloat(document.getElementById('batchTeacherRate').value);
 
-            const schoolPay = hours / (1 / schoolRate);
-            const teacherPay = hours / (1 / teacherRate);
-
-            const parts = yearMonth.split('-');
-            const year = parseInt(parts[0]);
-            const month = parseInt(parts[1]) - 1;
-            const d = new Date(year, month, 1);
+            const sPay = hours / (1 / sRate), tPay = hours / (1 / tRate);
+            const [year, month] = yearMonth.split('-');
+            const d = new Date(year, parseInt(month) - 1, 1);
             
-            let addedCount = 0;
             showLoading();
-
             try {
-                while (d.getMonth() === month) {
-                    if (d.getDay() === weekdayIndex) {
-                        const dayStr = String(d.getDate()).padStart(2, '0');
-                        const monthStr = String(month + 1).padStart(2, '0');
-                        const dateString = year + '-' + monthStr + '-' + dayStr;
-
+                let count = 0;
+                while (d.getMonth() === parseInt(month) - 1) {
+                    if (d.getDay() === weekday) {
+                        const dateStr = `${year}-${month}-${String(d.getDate()).padStart(2, '0')}`;
                         await addDoc(collection(db, "records"), {
-                            date: dateString,
-                            teacherName: tName,
-                            className: cName,
-                            hours: hours,
-                            schoolRate: schoolRate,
-                            teacherRate: teacherRate,
-                            schoolPay: schoolPay,
-                            teacherPay: teacherPay,
-                            expName: '',
-                            expAmt: 0
+                            date: dateStr, locationName: locName, teacherName: tName, className: cName,
+                            hours, schoolRate: sRate, teacherRate: tRate, schoolPay: sPay, teacherPay: tPay, expName: '', expAmt: 0
                         });
-                        addedCount++;
+                        count++;
                     }
                     d.setDate(d.getDate() + 1);
                 }
-
-                if (addedCount > 0) {
-                    alert('成功建立 ' + addedCount + ' 筆排課紀錄並已同步至雲端。');
-                    filterMonthInput.value = yearMonth;
-                    document.getElementById('batchForm').reset();
-                    document.getElementById('batchMonth').value = yearMonth;
-                    await loadRecords();
-                }
-            } catch (error) {
-                alert('寫入過程發生錯誤，請檢查網路連線。');
-            } finally {
-                hideLoading();
-            }
+                alert(`成功寫入 ${count} 筆紀錄！`);
+                document.getElementById('batchForm').reset();
+                document.getElementById('batchMonth').value = yearMonth;
+                filterMonthInput.value = yearMonth;
+                await loadRecords();
+            } catch (err) { alert('寫入失敗'); }
+            hideLoading();
         });
 
-        // 2. 單堂臨時新增提交
+        // 2. 單筆新增
         document.getElementById('singleForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            const dateVal = document.getElementById('singleDate').value;
-            const hours = parseFloat(document.getElementById('singleHours').value);
-            const schoolRate = parseFloat(document.getElementById('singleSchoolRate').value);
-            const teacherRate = parseFloat(document.getElementById('singleTeacherRate').value);
-            const tSelect = document.getElementById('singleTeacher');
-            const tName = tSelect.options[tSelect.selectedIndex].text;
+            const date = document.getElementById('singleDate').value;
+            const locName = getSelectText('singleLocation');
+            const tName = getSelectText('singleTeacher');
             const cName = document.getElementById('singleClass').value.trim();
-            
+            const hours = parseFloat(document.getElementById('singleHours').value);
+            const sRate = parseFloat(document.getElementById('singleSchoolRate').value);
+            const tRate = parseFloat(document.getElementById('singleTeacherRate').value);
             const expName = document.getElementById('singleExpName').value.trim();
-            const expAmtRaw = parseFloat(document.getElementById('singleExpAmt').value);
-            const expAmt = isNaN(expAmtRaw) ? 0 : expAmtRaw;
-
-            const schoolPay = hours / (1 / schoolRate);
-            const teacherPay = hours / (1 / teacherRate);
+            const expAmt = parseFloat(document.getElementById('singleExpAmt').value) || 0;
 
             showLoading();
             try {
                 await addDoc(collection(db, "records"), {
-                    date: dateVal,
-                    teacherName: tName,
-                    className: cName,
-                    hours: hours,
-                    schoolRate: schoolRate,
-                    teacherRate: teacherRate,
-                    schoolPay: schoolPay,
-                    teacherPay: teacherPay,
-                    expName: expName,
-                    expAmt: expAmt
+                    date, locationName: locName, teacherName: tName, className: cName,
+                    hours, schoolRate: sRate, teacherRate: tRate, 
+                    schoolPay: hours / (1 / sRate), teacherPay: hours / (1 / tRate), expName, expAmt
                 });
-                
-                filterMonthInput.value = dateVal.substring(0, 7);
                 document.getElementById('singleForm').reset();
+                filterMonthInput.value = date.substring(0, 7);
                 await loadRecords();
-            } catch (error) {
-                alert('寫入過程發生錯誤。');
-            } finally {
-                hideLoading();
-            }
+            } catch(err) { alert('寫入失敗'); }
+            hideLoading();
         });
 
-        // 3. 純粹額外支出提交
+        // 3. 支出新增
         document.getElementById('expenseForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            const dateVal = document.getElementById('expDate').value;
-            const tSelect = document.getElementById('expTeacher');
-            const tName = tSelect.options[tSelect.selectedIndex].text;
+            const date = document.getElementById('expDate').value;
+            const locName = getSelectText('expLocation');
+            const tName = getSelectText('expTeacher');
             const cName = document.getElementById('expClass').value.trim();
-            const detail = document.getElementById('expDetail').value.trim();
-            const total = parseFloat(document.getElementById('expTotal').value);
+            const expName = document.getElementById('expDetail').value.trim();
+            const expAmt = parseFloat(document.getElementById('expTotal').value);
 
             showLoading();
             try {
                 await addDoc(collection(db, "records"), {
-                    date: dateVal,
-                    teacherName: tName,
-                    className: cName,
-                    hours: 0,
-                    schoolRate: 0,
-                    teacherRate: 0,
-                    schoolPay: 0,
-                    teacherPay: 0,
-                    expName: detail,
-                    expAmt: total
+                    date, locationName: locName, teacherName: tName, className: cName,
+                    hours: 0, schoolRate: 0, teacherRate: 0, schoolPay: 0, teacherPay: 0, expName, expAmt
                 });
-
-                filterMonthInput.value = dateVal.substring(0, 7);
                 document.getElementById('expenseForm').reset();
+                filterMonthInput.value = date.substring(0, 7);
                 await loadRecords();
-            } catch (error) {
-                alert('寫入過程發生錯誤。');
-            } finally {
-                hideLoading();
-            }
+            } catch(err) { alert('寫入失敗'); }
+            hideLoading();
         });
 
-        // 導師管理功能
-        document.getElementById('btnAddTeacher').addEventListener('click', async function() {
-            const nName = document.getElementById('newTName').value.trim();
-            const nSubj = document.getElementById('newTSubject').value.trim();
-            if(!nName) {
-                alert('請輸入導師姓名');
-                return;
-            }
-            
-            showLoading();
-            try {
-                await addDoc(collection(db, "teachers"), {
-                    name: nName,
-                    subject: nSubj || '未指定'
-                });
-                
-                document.getElementById('newTName').value = '';
-                document.getElementById('newTSubject').value = '';
-                await loadTeachers();
-            } catch (error) {
-                alert('新增導師發生錯誤。');
-            } finally {
-                hideLoading();
-            }
-        });
-
-        const modalOverlay = document.getElementById('modalOverlay');
-        document.getElementById('btnOpenModal').addEventListener('click', function() {
-            refreshTeacherList();
-            modalOverlay.style.display = 'flex';
-        });
-        document.getElementById('btnCloseModal').addEventListener('click', function() {
-            modalOverlay.style.display = 'none';
-        });
-
-        // 清空當月所有雲端紀錄
-        document.getElementById('btnClearRecords').addEventListener('click', async function() {
-            const selectedMonth = filterMonthInput.value;
-            const currentMonthRecords = records.filter(function(r) { return r.date.substring(0, 7) === selectedMonth; });
-            
-            if(currentMonthRecords.length === 0) return;
-            
-            if(confirm('警告：此動作將從雲端資料庫永久刪除【' + selectedMonth + '】的所有紀錄。確定要繼續嗎？')) {
+        // 清空紀錄
+        document.getElementById('btnClearRecords').onclick = async () => {
+            const m = filterMonthInput.value;
+            const targets = records.filter(r => r.date.substring(0, 7) === m);
+            if(targets.length === 0) return;
+            if(confirm(`警告：確定永久刪除【${m}】共 ${targets.length} 筆紀錄？`)) {
                 showLoading();
-                try {
-                    for (const r of currentMonthRecords) {
-                        await deleteDoc(doc(db, "records", r.id));
-                    }
-                    await loadRecords();
-                } catch (error) {
-                    alert('批次刪除發生錯誤。');
-                } finally {
-                    hideLoading();
-                }
+                for(let r of targets) await deleteDoc(doc(db, "records", r.id));
+                await loadRecords(); hideLoading();
             }
-        });
+        };
 
-        // 匯出包含完整利潤明細的 Excel
-        document.getElementById('btnExport').addEventListener('click', function() {
-            const selectedMonth = filterMonthInput.value;
-            const currentMonthRecords = records.filter(function(r) { return r.date.substring(0, 7) === selectedMonth; });
+        // 匯出 Excel
+        document.getElementById('btnExport').onclick = () => {
+            const m = filterMonthInput.value;
+            const targets = records.filter(r => r.date.substring(0, 7) === m);
+            if(targets.length === 0) return alert('當前月份無資料');
             
-            if(currentMonthRecords.length === 0) {
-                alert('當前月份沒有任何資料可供匯出');
-                return;
-            }
-            try {
-                const wsData = [['上課日期', '導師姓名', '歸屬班級', '授課時數', '補習班請款鐘點', '導師實領鐘點', '補習班總撥款', '導師薪資總計', '額外支出項目', '支出金額', '單筆實收淨利']];
-                
-                currentMonthRecords.sort(function(a, b) {
-                    return new Date(a.date) - new Date(b.date);
-                }).forEach(function(r) {
-                    const singleProfit = r.schoolPay - r.teacherPay - r.expAmt;
-                    wsData.push([
-                        r.date, 
-                        r.teacherName, 
-                        r.className, 
-                        r.hours > 0 ? r.hours : '無', 
-                        r.schoolRate > 0 ? r.schoolRate : '無', 
-                        r.teacherRate > 0 ? r.teacherRate : '無', 
-                        r.schoolPay,
-                        r.teacherPay,
-                        r.expName || '無', 
-                        r.expAmt, 
-                        singleProfit
-                    ]);
-                });
-                
-                const wb = XLSX.utils.book_new();
-                const ws = XLSX.utils.aoa_to_sheet(wsData);
-                XLSX.utils.book_append_sheet(wb, ws, selectedMonth + " 營運結算");
-                XLSX.writeFile(wb, "派件營運雲端結算報表_" + selectedMonth + ".xlsx");
-            } catch(e) {
-                alert('匯出失敗，請確認網路連線是否正常以載入匯出模組。');
-            }
-        });
+            const wsData = [['上課日期', '所屬補習班', '歸屬班級', '導師姓名', '授課時數', '補習班請款鐘點', '導師實領鐘點', '補習班總撥款', '導師薪資總計', '額外支出項目', '支出金額', '單筆實收淨利']];
+            
+            targets.sort((a,b) => new Date(a.date) - new Date(b.date)).forEach(r => {
+                wsData.push([
+                    r.date, r.locationName || '無', r.className || '無', r.teacherName, 
+                    r.hours || '無', r.schoolRate || '無', r.teacherRate || '無', 
+                    r.schoolPay, r.teacherPay, r.expName || '無', r.expAmt, 
+                    (r.schoolPay - r.teacherPay - r.expAmt)
+                ]);
+            });
+            
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(wsData), "結算");
+            XLSX.writeFile(wb, `營運結算_${m}.xlsx`);
+        };
     </script>
 </body>
 </html>

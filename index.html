@@ -71,7 +71,6 @@
         .stat-card.highlight h3 { color: #4CAF50; }
         .stat-card.revenue { border-left: 4px solid #2196F3; }
         
-        /* 補習班進度條樣式 */
         .progress-container { margin-bottom: 15px; background: #181818; padding: 15px; border-radius: 6px; border: 1px solid #333; }
         .progress-header { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
         .progress-bar-bg { width: 100%; background-color: #333; border-radius: 4px; height: 10px; overflow: hidden; }
@@ -79,7 +78,7 @@
         .progress-bar-fill.success { background-color: #4CAF50; }
         
         .header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .filter-section { display: flex; align-items: center; gap: 15px; }
+        .filter-section { display: flex; align-items: center; gap: 15px; flex-wrap: wrap; }
         .filter-label { color: #D4AF37; font-weight: bold; }
 
         .table-container { overflow-x: auto; max-height: 500px; overflow-y: auto; }
@@ -90,8 +89,12 @@
         .text-right { text-align: right; }
         .text-gold { color: #D4AF37; font-weight: bold; }
         .text-green { color: #4CAF50; font-weight: bold; }
-        .delete-record-btn { color: #888; background: none; border: none; cursor: pointer; font-size: 18px; transition: color 0.2s; padding: 0 5px; }
-        .delete-record-btn:hover { color: #ff6b6b; }
+        .action-btn { background: none; border: none; cursor: pointer; font-size: 16px; transition: color 0.2s; padding: 0 5px; }
+        .action-btn.delete:hover { color: #ff6b6b; color: #888; }
+        .action-btn.edit { color: #2196F3; }
+        .action-btn.edit:hover { color: #64b5f6; }
+        .action-btn.delete { color: #888; }
+        
         .badge { background-color: #333; color: #ccc; padding: 2px 6px; border-radius: 4px; font-size: 11px; margin-left: 5px; }
         .badge-loc { background-color: #2c2c2c; color: #4CAF50; border: 1px solid #4CAF50; }
 
@@ -136,7 +139,7 @@
         <header>
             <div>
                 <h1>雲端營運與利潤管理系統</h1>
-                <p class="subtitle">Firestore 雲端同步架構 (含多據點目標管理)</p>
+                <p class="subtitle">Firestore 雲端同步架構 (含多據點報表與進階編輯)</p>
             </div>
             <div style="display: flex; gap: 15px;">
                 <button id="btnOpenLocationModal" class="btn-outline" style="width: auto; border-color: #4CAF50; color: #4CAF50;">管理補習班目標</button>
@@ -216,9 +219,15 @@
                 
                 <div class="card" style="padding: 15px 20px; margin-bottom: -5px;">
                     <div class="filter-section">
-                        <span class="filter-label">當前結算月份：</span>
-                        <input type="month" id="filterMonth" style="width: 200px; margin: 0;">
-                        <button id="btnExport" class="btn-gold" style="width: auto; margin-left: auto;">匯出此月完整 Excel</button>
+                        <span class="filter-label">結算月份：</span>
+                        <input type="month" id="filterMonth" style="width: 150px; margin: 0;">
+                        
+                        <span class="filter-label" style="margin-left: 10px;">匯出據點：</span>
+                        <select id="exportLocationFilter" style="width: 150px; margin: 0; padding: 8px;">
+                            <option value="ALL">全部據點</option>
+                        </select>
+
+                        <button id="btnExport" class="btn-gold" style="width: auto; margin-left: auto;">匯出此月 Excel</button>
                     </div>
                 </div>
 
@@ -243,8 +252,7 @@
 
                 <div class="card" id="locationProgressSection">
                     <h2 style="font-size: 16px; border-bottom: none; margin-bottom: 5px;">🎯 各補習班目標達成進度</h2>
-                    <div id="locationProgressUI" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px;">
-                        </div>
+                    <div id="locationProgressUI" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px;"></div>
                 </div>
 
                 <div class="card">
@@ -264,7 +272,7 @@
                                     <th>導師成本</th>
                                     <th>雜支</th>
                                     <th class="text-right">單筆利潤</th>
-                                    <th style="width: 40px;"></th>
+                                    <th style="width: 70px; text-align: center;">操作</th>
                                 </tr>
                             </thead>
                             <tbody id="tableBody"></tbody>
@@ -273,6 +281,25 @@
                 </div>
 
             </div>
+        </div>
+    </div>
+
+    <div id="editRecordModalOverlay" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 style="color: #2196F3;">手動編輯營運數字</h2>
+                <button class="close-btn" onclick="document.getElementById('editRecordModalOverlay').style.display='none'">&times;</button>
+            </div>
+            <input type="hidden" id="editRecordId">
+            <div class="grid-2">
+                <div class="form-group"><label>授課時數</label><input type="number" id="editHours" step="0.5"></div>
+                <div class="form-group"><label>雜支金額</label><input type="number" id="editExpAmt"></div>
+            </div>
+            <div class="grid-2">
+                <div class="form-group"><label style="color: #2196F3;">補習班給付 (營收)</label><input type="number" id="editSchoolPay"></div>
+                <div class="form-group"><label style="color: #ff9800;">導師實領 (成本)</label><input type="number" id="editTeacherPay"></div>
+            </div>
+            <button id="btnSaveRecordEdit" class="btn-gold" style="background-color: #2196F3; color: #fff; margin-top: 10px;">儲存修改並同步雲端</button>
         </div>
     </div>
 
@@ -307,8 +334,9 @@
     </div>
 
     <script type="module">
+        // 匯入包含 updateDoc 的 Firebase 模組
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, updateDoc } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
         const SYSTEM_PASSWORD = "8888"; 
         const firebaseConfig = {
@@ -331,6 +359,7 @@
         const filterMonthInput = document.getElementById('filterMonth');
         const batchMonthInput = document.getElementById('batchMonth');
         const loadingOverlay = document.getElementById('loadingOverlay');
+        const exportLocationFilter = document.getElementById('exportLocationFilter');
 
         function showLoading() { loadingOverlay.style.display = 'flex'; }
         function hideLoading() { loadingOverlay.style.display = 'none'; }
@@ -385,6 +414,15 @@
             qs.forEach(doc => locations.push({ id: doc.id, ...doc.data() }));
             refreshSelects('.location-select', locations, 'name');
             renderLocationList();
+
+            // 更新匯出用的下拉選單
+            exportLocationFilter.innerHTML = '<option value="ALL">全部據點</option>';
+            locations.forEach(loc => {
+                const opt = document.createElement('option');
+                opt.value = loc.name;
+                opt.textContent = loc.name;
+                exportLocationFilter.appendChild(opt);
+            });
         }
 
         async function loadRecords() {
@@ -411,7 +449,6 @@
             });
         }
 
-        // 導師與補習班列表 UI
         function renderTeacherList() {
             const ui = document.getElementById('teacherListUI');
             ui.innerHTML = teachers.length ? '' : '<li class="empty-msg">尚無資料</li>';
@@ -452,7 +489,6 @@
             const filteredRecords = records.filter(rec => rec.date.substring(0, 7) === selectedMonth);
             const sorted = filteredRecords.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-            // 計算各補習班利潤
             let locProfits = {};
             locations.forEach(loc => locProfits[loc.name] = 0);
 
@@ -463,7 +499,6 @@
                 const singleProfit = rec.schoolPay - rec.teacherPay - rec.expAmt;
                 totalProfit += singleProfit;
 
-                // 累加至對應補習班
                 if(rec.locationName && locProfits[rec.locationName] !== undefined) {
                     locProfits[rec.locationName] += singleProfit;
                 }
@@ -481,17 +516,35 @@
                     <td><span style="color:#ff9800;">${rec.teacherPay > 0 ? rec.teacherPay.toLocaleString() : '-'}</span></td>
                     <td>${rec.expAmt > 0 ? rec.expAmt.toLocaleString() : '-'}</td>
                     <td class="text-right ${singleProfit >= 0 ? 'text-green' : 'text-danger'}">NT$ ${singleProfit.toLocaleString()}</td>
-                    <td class="text-right"><button class="delete-record-btn" data-id="${rec.id}">&times;</button></td>
+                    <td style="text-align: center; white-space: nowrap;">
+                        <button class="action-btn edit" data-id="${rec.id}" title="編輯數字">✏️</button>
+                        <button class="action-btn delete" data-id="${rec.id}" title="刪除紀錄">&times;</button>
+                    </td>
                 `;
                 tableBody.appendChild(tr);
             });
 
-            // 綁定刪除按鈕
-            document.querySelectorAll('.delete-record-btn').forEach(btn => {
+            // 綁定編輯與刪除按鈕
+            document.querySelectorAll('.action-btn.delete').forEach(btn => {
                 btn.onclick = async function() {
-                    if(confirm('確定永久刪除？')) {
+                    if(confirm('確定永久刪除這筆紀錄？')) {
                         showLoading(); await deleteDoc(doc(db, "records", this.getAttribute('data-id')));
                         await loadRecords(); hideLoading();
+                    }
+                };
+            });
+
+            document.querySelectorAll('.action-btn.edit').forEach(btn => {
+                btn.onclick = function() {
+                    const id = this.getAttribute('data-id');
+                    const rec = records.find(r => r.id === id);
+                    if(rec) {
+                        document.getElementById('editRecordId').value = id;
+                        document.getElementById('editHours').value = rec.hours || 0;
+                        document.getElementById('editSchoolPay').value = rec.schoolPay || 0;
+                        document.getElementById('editTeacherPay').value = rec.teacherPay || 0;
+                        document.getElementById('editExpAmt').value = rec.expAmt || 0;
+                        document.getElementById('editRecordModalOverlay').style.display = 'flex';
                     }
                 };
             });
@@ -501,7 +554,6 @@
             document.getElementById('displayExpPay').textContent = 'NT$ ' + sumExpPay.toLocaleString();
             document.getElementById('displayProfit').textContent = 'NT$ ' + totalProfit.toLocaleString();
 
-            // 繪製目標進度條
             const progressUI = document.getElementById('locationProgressUI');
             progressUI.innerHTML = '';
             locations.forEach(loc => {
@@ -525,6 +577,30 @@
             });
         }
         filterMonthInput.addEventListener('change', refreshDashboard);
+
+        // 儲存行內編輯數字
+        document.getElementById('btnSaveRecordEdit').onclick = async () => {
+            const id = document.getElementById('editRecordId').value;
+            const hours = parseFloat(document.getElementById('editHours').value) || 0;
+            const schoolPay = parseFloat(document.getElementById('editSchoolPay').value) || 0;
+            const teacherPay = parseFloat(document.getElementById('editTeacherPay').value) || 0;
+            const expAmt = parseFloat(document.getElementById('editExpAmt').value) || 0;
+
+            showLoading();
+            try {
+                await updateDoc(doc(db, "records", id), {
+                    hours: hours,
+                    schoolPay: schoolPay,
+                    teacherPay: teacherPay,
+                    expAmt: expAmt
+                });
+                document.getElementById('editRecordModalOverlay').style.display = 'none';
+                await loadRecords();
+            } catch(err) {
+                alert('更新紀錄失敗');
+            }
+            hideLoading();
+        };
 
         // 新增導師 / 補習班
         document.getElementById('btnOpenTeacherModal').onclick = () => document.getElementById('teacherModalOverlay').style.display='flex';
@@ -550,7 +626,6 @@
             await loadLocations(); hideLoading();
         };
 
-        // 表單提交流程輔助函數
         function getSelectText(id) {
             const el = document.getElementById(id);
             return el.options[el.selectedIndex].text;
@@ -657,11 +732,19 @@
             }
         };
 
-        // 匯出 Excel
+        // 匯出特定據點或全部 Excel
         document.getElementById('btnExport').onclick = () => {
             const m = filterMonthInput.value;
-            const targets = records.filter(r => r.date.substring(0, 7) === m);
-            if(targets.length === 0) return alert('當前月份無資料');
+            const selectedLoc = document.getElementById('exportLocationFilter').value;
+            
+            let targets = records.filter(r => r.date.substring(0, 7) === m);
+            
+            // 如果有選擇特定據點，就進行篩選
+            if(selectedLoc !== 'ALL') {
+                targets = targets.filter(r => r.locationName === selectedLoc);
+            }
+            
+            if(targets.length === 0) return alert('此條件下當前月份無資料可供匯出');
             
             const wsData = [['上課日期', '所屬補習班', '歸屬班級', '導師姓名', '授課時數', '補習班請款鐘點', '導師實領鐘點', '補習班總撥款', '導師薪資總計', '額外支出項目', '支出金額', '單筆實收淨利']];
             
@@ -675,8 +758,11 @@
             });
             
             const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(wsData), "結算");
-            XLSX.writeFile(wb, `營運結算_${m}.xlsx`);
+            const sheetName = selectedLoc === 'ALL' ? "全部據點結算" : `${selectedLoc}結算`;
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(wsData), sheetName);
+            
+            const filename = selectedLoc === 'ALL' ? `營運結算_全部據點_${m}.xlsx` : `營運結算_${selectedLoc}_${m}.xlsx`;
+            XLSX.writeFile(wb, filename);
         };
     </script>
 </body>

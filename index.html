@@ -478,10 +478,20 @@
                     const opt = document.createElement('option');
                     opt.value = item.id;
                     opt.textContent = secondaryKey ? `${item[primaryKey]} (${item[secondaryKey]})` : item[primaryKey];
+                    opt.setAttribute('data-pure-name', item[primaryKey]);
                     sel.appendChild(opt);
                 });
                 sel.value = currentVal;
             });
+        }
+
+        function getPureName(id) {
+            const el = document.getElementById(id);
+            if (el.selectedIndex > 0) {
+                const dataName = el.options[el.selectedIndex].getAttribute('data-pure-name');
+                return dataName ? dataName : el.options[el.selectedIndex].text;
+            }
+            return "";
         }
 
         function renderTeacherList() {
@@ -538,7 +548,10 @@
                 filteredRecords = filteredRecords.filter(rec => rec.locationName === selectedLoc);
             }
             if (selectedTch !== "ALL") {
-                filteredRecords = filteredRecords.filter(rec => rec.teacherName === selectedTch);
+                filteredRecords = filteredRecords.filter(rec => {
+                    if (!rec.teacherName) return false;
+                    return rec.teacherName === selectedTch || rec.teacherName.startsWith(selectedTch + " (");
+                });
             }
 
             const sorted = filteredRecords.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -605,7 +618,7 @@
             locations.forEach(loc => {
                 const currentProfit = locProfits[loc.name] || 0;
                 const target = loc.targetProfit || 1; 
-                let percent = Math.max(0, Math.min(100, (currentProfit / target) * 100));
+                let percent = Math.max(0, Math.min(100, (currentProfit / target) / 0.01));
                 
                 const div = document.createElement('div');
                 div.className = 'progress-container';
@@ -673,17 +686,12 @@
             await loadLocations(); hideLoading();
         };
 
-        function getSelectText(id) {
-            const el = document.getElementById(id);
-            return el.selectedIndex >= 0 && el.value !== "" ? el.options[el.selectedIndex].text : "";
-        }
-
         document.getElementById('batchForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const yearMonth = document.getElementById('batchMonth').value;
             const weekday = parseInt(document.getElementById('batchWeekday').value);
-            const locName = getSelectText('batchLocation');
-            const tName = getSelectText('batchTeacher');
+            const locName = getPureName('batchLocation');
+            const tName = getPureName('batchTeacher');
             const cName = document.getElementById('batchClass').value.trim();
             const hours = parseFloat(document.getElementById('batchHours').value);
             const sRate = parseFloat(document.getElementById('batchSchoolRate').value);
@@ -724,8 +732,8 @@
             try {
                 await addDoc(collection(db, "records"), {
                     date: document.getElementById('singleDate').value,
-                    locationName: getSelectText('singleLocation'),
-                    teacherName: getSelectText('singleTeacher'),
+                    locationName: getPureName('singleLocation'),
+                    teacherName: getPureName('singleTeacher'),
                     className: document.getElementById('singleClass').value.trim(),
                     hours: hours, schoolRate: sRate, teacherRate: tRate,
                     schoolPay: hours / (1 / sRate), teacherPay: hours / (1 / tRate),
@@ -744,8 +752,8 @@
             try {
                 await addDoc(collection(db, "records"), {
                     date: document.getElementById('expDate').value,
-                    locationName: getSelectText('expLocation'),
-                    teacherName: getSelectText('expTeacher'),
+                    locationName: getPureName('expLocation'),
+                    teacherName: getPureName('expTeacher'),
                     className: document.getElementById('expClass').value.trim(),
                     hours: 0, schoolRate: 0, teacherRate: 0, schoolPay: 0, teacherPay: 0,
                     expName: document.getElementById('expDetail').value.trim(),
@@ -767,7 +775,10 @@
                 recordsToDelete = recordsToDelete.filter(r => r.locationName === selectedLoc);
             }
             if (selectedTch !== "ALL") {
-                recordsToDelete = recordsToDelete.filter(r => r.teacherName === selectedTch);
+                recordsToDelete = recordsToDelete.filter(r => {
+                    if (!r.teacherName) return false;
+                    return r.teacherName === selectedTch || r.teacherName.startsWith(selectedTch + " (");
+                });
             }
             
             if(recordsToDelete.length === 0) return alert('該範圍內沒有可刪除的紀錄');
@@ -809,7 +820,12 @@
             const selectedTch = filterTeacherInput.value;
             let targetRecords = records.filter(r => r.date.substring(0, 7) === selectedMonth);
             if (selectedLoc !== "ALL") targetRecords = targetRecords.filter(r => r.locationName === selectedLoc);
-            if (selectedTch !== "ALL") targetRecords = targetRecords.filter(r => r.teacherName === selectedTch);
+            if (selectedTch !== "ALL") {
+                targetRecords = targetRecords.filter(r => {
+                    if (!r.teacherName) return false;
+                    return r.teacherName === selectedTch || r.teacherName.startsWith(selectedTch + " (");
+                });
+            }
             
             if(targetRecords.length === 0) return alert('無資料可匯出');
 
@@ -842,11 +858,16 @@
         };
 
         document.getElementById('btnExportTeacher').onclick = () => {
-            const tName = getSelectText('exportTeacherSelect');
+            const tName = getPureName('exportTeacherSelect');
             const month = filterMonthInput.value;
-            if(!tName || tName === '請選擇...') return alert('請先選擇導師');
+            if(!tName) return alert('請先選擇導師');
 
-            const filtered = records.filter(r => r.date.substring(0, 7) === month && r.teacherName === tName);
+            const filtered = records.filter(r => {
+                if (r.date.substring(0, 7) !== month) return false;
+                if (!r.teacherName) return false;
+                return r.teacherName === tName || r.teacherName.startsWith(tName + " (");
+            });
+
             if(filtered.length === 0) return alert(`【${tName}】在 ${month} 無任何薪資與排課紀錄`);
 
             const ws_data = [["上課日期", "授課據點", "班級", "時數", "應領鐘點費", "雜支扣款", "雜支明細", "實發小計"]];

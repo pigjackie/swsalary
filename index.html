@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>補教派件營運利潤管理系統</title>
+    <title>宋維團隊財務管理系統</title>
     <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"></script>
     <style>
         html, body, div, header, h1, h2, h3, p, form, input, select, button, table, thead, tbody, tr, th, td, ul, li, span, label {
@@ -138,8 +138,8 @@
         
         <header>
             <div>
-                <h1>雲端營運與利潤管理系統</h1>
-                <p class="subtitle">Firestore 雲端同步架構 (含多據點報表與進階編輯)</p>
+                <h1>宋維團隊財務管理系統</h1>
+                <p class="subtitle">Firestore 雲端同步架構 (含多據點、多導師報表與進階編輯)</p>
             </div>
             <div style="display: flex; gap: 15px;">
                 <button id="btnOpenLocationModal" class="btn-outline" style="width: auto; border-color: #4CAF50; color: #4CAF50;">管理補習班目標</button>
@@ -227,6 +227,11 @@
                         <select id="filterLocation" style="width: 150px; margin: 0; padding: 8px;">
                             <option value="ALL">全部據點 (綜合)</option>
                         </select>
+
+                        <span class="filter-label" style="margin-left: 10px;">資料檢視導師：</span>
+                        <select id="filterTeacher" style="width: 150px; margin: 0; padding: 8px;">
+                            <option value="ALL">全部導師 (綜合)</option>
+                        </select>
                     </div>
                 </div>
 
@@ -284,7 +289,7 @@
                     <div class="grid-2">
                         <div style="background: #181818; padding: 15px; border-radius: 6px; border: 1px solid #333;">
                             <label style="color: #2196F3; font-weight: bold;">據點營收總表</label>
-                            <p style="font-size: 12px; color: #888; margin-bottom: 10px;">匯出當前月份與指定據點的完整明細。</p>
+                            <p style="font-size: 12px; color: #888; margin-bottom: 10px;">匯出當前月份、指定據點與導師的完整明細。</p>
                             <button id="btnExportGlobal" class="btn-outline" style="border-color: #2196F3; color: #2196F3;">匯出據點營運總表</button>
                         </div>
                         <div style="background: #181818; padding: 15px; border-radius: 6px; border: 1px solid #333;">
@@ -373,6 +378,7 @@
 
         const filterMonthInput = document.getElementById('filterMonth');
         const filterLocationInput = document.getElementById('filterLocation');
+        const filterTeacherInput = document.getElementById('filterTeacher');
         const batchMonthInput = document.getElementById('batchMonth');
         const loadingOverlay = document.getElementById('loadingOverlay');
 
@@ -430,6 +436,14 @@
             qs.forEach(doc => teachers.push({ id: doc.id, ...doc.data() }));
             refreshSelects('.teacher-select', teachers, 'name', 'subject');
             renderTeacherList();
+
+            filterTeacherInput.innerHTML = '<option value="ALL">全部導師 (綜合)</option>';
+            teachers.forEach(t => {
+                const opt = document.createElement('option');
+                opt.value = t.name;
+                opt.textContent = t.name;
+                filterTeacherInput.appendChild(opt);
+            });
         }
 
         async function loadLocations() {
@@ -507,6 +521,7 @@
             let sumSchoolPay = 0, sumTeacherPay = 0, sumExpPay = 0, totalProfit = 0;
             const selectedMonth = filterMonthInput.value;
             const selectedLoc = filterLocationInput.value;
+            const selectedTch = filterTeacherInput.value;
 
             let filteredRecords = records.filter(rec => rec.date.substring(0, 7) === selectedMonth);
             
@@ -521,6 +536,9 @@
 
             if (selectedLoc !== "ALL") {
                 filteredRecords = filteredRecords.filter(rec => rec.locationName === selectedLoc);
+            }
+            if (selectedTch !== "ALL") {
+                filteredRecords = filteredRecords.filter(rec => rec.teacherName === selectedTch);
             }
 
             const sorted = filteredRecords.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -607,6 +625,7 @@
         
         filterMonthInput.addEventListener('change', refreshDashboard);
         filterLocationInput.addEventListener('change', refreshDashboard);
+        filterTeacherInput.addEventListener('change', refreshDashboard);
 
         document.getElementById('btnSaveRecordEdit').onclick = async () => {
             const id = document.getElementById('editRecordId').value;
@@ -741,19 +760,24 @@
         document.getElementById('btnClearRecords').addEventListener('click', async function() {
             const selectedMonth = filterMonthInput.value;
             const selectedLoc = filterLocationInput.value;
+            const selectedTch = filterTeacherInput.value;
             
             let recordsToDelete = records.filter(r => r.date.substring(0, 7) === selectedMonth);
             if (selectedLoc !== "ALL") {
                 recordsToDelete = recordsToDelete.filter(r => r.locationName === selectedLoc);
             }
+            if (selectedTch !== "ALL") {
+                recordsToDelete = recordsToDelete.filter(r => r.teacherName === selectedTch);
+            }
             
             if(recordsToDelete.length === 0) return alert('該範圍內沒有可刪除的紀錄');
             
-            const msg = selectedLoc === "ALL" 
-                ? `確定永久刪除【${selectedMonth}】「所有據點」共 ${recordsToDelete.length} 筆紀錄？` 
-                : `確定永久刪除【${selectedMonth}】「${selectedLoc}」共 ${recordsToDelete.length} 筆紀錄？`;
+            let scopeMsg = "所有紀錄";
+            if (selectedLoc !== "ALL" && selectedTch !== "ALL") scopeMsg = `「${selectedLoc}」的「${selectedTch}」`;
+            else if (selectedLoc !== "ALL") scopeMsg = `「${selectedLoc}」`;
+            else if (selectedTch !== "ALL") scopeMsg = `「${selectedTch}」`;
                 
-            if(confirm(msg)) {
+            if(confirm(`確定永久刪除【${selectedMonth}】${scopeMsg}共 ${recordsToDelete.length} 筆紀錄？`)) {
                 showLoading();
                 try {
                     for(const r of recordsToDelete) { await deleteDoc(doc(db, "records", r.id)); }
@@ -763,21 +787,17 @@
             }
         });
 
-        // 報表匯出功能 (結合樣式與小計/總計)
         function applyExcelStyles(ws, range, isTeacherReport) {
             for(let C = range.s.c; C <= range.e.c; ++C) {
-                // 標題列樣式 (黑底金字)
                 const headerAddress = XLSX.utils.encode_cell({c: C, r: 0});
                 if(ws[headerAddress]) {
                     ws[headerAddress].s = { fill: { fgColor: { rgb: "FF1e1e1e" } }, font: { color: { rgb: "FFD4AF37" }, bold: true }, alignment: { horizontal: "center" } };
                 }
-                // 總計列樣式 (綠底白字)
                 const totalAddress = XLSX.utils.encode_cell({c: C, r: range.e.r});
                 if(ws[totalAddress]) {
                     ws[totalAddress].s = { fill: { fgColor: { rgb: "FF4CAF50" } }, font: { color: { rgb: "FFFFFFFF" }, bold: true }, alignment: { horizontal: (C === 0 ? "center" : "right") } };
                 }
             }
-            // 欄寬調整
             ws['!cols'] = isTeacherReport 
                 ? [{wch: 12}, {wch: 15}, {wch: 15}, {wch: 8}, {wch: 12}, {wch: 12}, {wch: 20}, {wch: 15}]
                 : [{wch: 12}, {wch: 15}, {wch: 12}, {wch: 15}, {wch: 8}, {wch: 12}, {wch: 12}, {wch: 12}, {wch: 20}, {wch: 15}];
@@ -786,8 +806,10 @@
         document.getElementById('btnExportGlobal').onclick = () => {
             const selectedMonth = filterMonthInput.value;
             const selectedLoc = filterLocationInput.value;
+            const selectedTch = filterTeacherInput.value;
             let targetRecords = records.filter(r => r.date.substring(0, 7) === selectedMonth);
             if (selectedLoc !== "ALL") targetRecords = targetRecords.filter(r => r.locationName === selectedLoc);
+            if (selectedTch !== "ALL") targetRecords = targetRecords.filter(r => r.teacherName === selectedTch);
             
             if(targetRecords.length === 0) return alert('無資料可匯出');
 
@@ -809,8 +831,14 @@
 
             const wb = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(wb, ws, "營運總表");
-            const fileName = selectedLoc === "ALL" ? `補教營運總表_${selectedMonth}.xlsx` : `${selectedLoc}_營運明細_${selectedMonth}.xlsx`;
-            XLSX.writeFile(wb, fileName);
+            
+            let fileNameBase = "營運明細";
+            if (selectedLoc !== "ALL" && selectedTch !== "ALL") fileNameBase = `${selectedLoc}_${selectedTch}`;
+            else if (selectedLoc !== "ALL") fileNameBase = selectedLoc;
+            else if (selectedTch !== "ALL") fileNameBase = selectedTch;
+            else fileNameBase = "營運總表";
+
+            XLSX.writeFile(wb, `宋維團隊_${fileNameBase}_${selectedMonth}.xlsx`);
         };
 
         document.getElementById('btnExportTeacher').onclick = () => {
@@ -839,7 +867,7 @@
 
             const wb = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(wb, ws, "專屬薪資單");
-            XLSX.writeFile(wb, `${tName}_${month}_薪資單.xlsx`);
+            XLSX.writeFile(wb, `宋維團隊_${tName}_${month}_薪資單.xlsx`);
         };
     </script>
 </body>
